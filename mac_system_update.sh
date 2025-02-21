@@ -2,6 +2,7 @@
 
 # mac_system_update.sh
 # 2023-09-26
+# 2025-02-21 Update with many more tools/frameworks
 # Purpose: Updating macOS packages and development tools
 
 echo "Starting to update system..."
@@ -104,21 +105,47 @@ dotnet tool install --global dotnet-sonarscanner
 # Install applications
 # -----------------------------
 # Networking & Security Tools
-brew install --cask angry-ip-scanner keepassxc veracrypt 
+brew install --cask angry-ip-scanner keepassxc veracrypt wireshark
 
 # File Management & Utilities
-brew install --cask easyfind exifcleaner blackhole-2ch macfuse wkhtmltopdf 
+brew install --cask easyfind exifcleaner blackhole-2ch macfuse wkhtmltopdf
 
-# Development & Programming
-brew install --cask mjml postman oracle-jdk@21 
+# Development & Database
+brew install --cask mjml postman oracle-jdk@21 jetbrains-toolbox visual-studio-code pgadmin4
 
-# Database & Productivity
-brew install --cask pgadmin4 calibre qview 
+# Library Management
+brew install --cask calibre
 
 # Media & Streaming
-brew install --cask imageoptim obs transmission 
+brew install --cask imageoptim obs transmission vlc qview
 
 # Automation & System Tools
 brew install --cask hammerspoon
+
+# Coding Fonts
+brew install --cask font-fira-code font-fira-mono font-fira-sans font-fira-sans-condensed font-fira-sans-extra-condensed
+brew install --cask font-hack font-hack-nerd-font
+brew install --cask font-jetbrains-mono font-jetbrains-mono-nerd-font
+brew install --cask font-cascadia-code font-cascadia-code-nf font-cascadia-mono font-cascadia-mono-nf
+brew install --cask font-meslo-lg
+
+# Sans-serif Fonts
+brew install --cask font-inter font-inter-nerd-font font-inter-extra-light font-inter-light font-inter-medium font-inter-semi-bold font-inter-thin
+brew install --cask font-roboto font-roboto-condensed font-roboto-mono font-roboto-slab
+brew install --cask font-open-sans font-open-sans-condensed font-open-sans-extra-bold font-open-sans-light font-open-sans-semi-bold
+brew install --cask font-noto-sans 
+
+# Serif Fonts
+brew install --cask font-ibm-plex-serif font-ibm-plex-serif-condensed font-ibm-plex-serif-extra-light font-ibm-plex-serif-light font-ibm-plex-serif-medium font-ibm-plex-serif-semi-bold font-ibm-plex-serif-thin
+brew install --cask font-merriweather font-merriweather-sans font-merriweather-serif
+brew install --cask font-playfair-display font-playfair-display-sc 
+brew install --cask font-source-serif-pro font-source-serif-pro-nerd-font
+
+# Decorative Fonts
+brew install --cask font-comic-code font-comic-neue font-comic-neue-angular font-comic-neue-hk font-comic-neue-hk-angular font-comic-neue-hk-sc font-comic-neue-hk-sc-angular
+brew install --cask font-lobster font-lobster-two font-lobster-two-nerd-font
+brew install --cask font-pacifico font-pacifico-nerd-font
+brew install --cask font-raleway font-raleway-dots font-raleway-nerd-font font-raleway-thin font-raleway-thin-dots
+
 
 echo "System update complete!"
