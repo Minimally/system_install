@@ -5,6 +5,26 @@
 # 2025-02-21 Update with many more tools/frameworks
 # Purpose: Updating macOS packages and development tools
 
+# Usage example:
+# install_package git
+install_package() {
+    if ! brew list --formula | grep -q "^$1$"; then
+        brew install "$1"
+    else
+        echo "$1 is already installed."
+    fi
+}
+
+# Usage example:
+# install_cask pgadmin4
+install_cask() {
+    if ! brew list --cask | grep -q "^$1$"; then
+        brew install --cask "$1"
+    else
+        echo "$1 is already installed."
+    fi
+}
+
 echo "Starting to update system..."
 
 # Install Homebrew if not already installed
@@ -73,13 +93,11 @@ jenv global $(ls /Library/Java/JavaVirtualMachines | grep jdk | head -n 1)
 # Install Node.js and Tools
 # -----------------------------
 echo "Setting up Node.js..."
-brew install nvm
-mkdir -p ~/.nvm
-echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
-echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"' >> ~/.zshrc
-echo '[ -s "/opt/homebrew/opt/nvm/etc/bash_completion" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion"' >> ~/.zshrc
-source ~/.zshrc
-
+if [ ! -d "$HOME/.nvm" ]; then
+    echo "Installing NVM..."
+    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    source ~/.nvm/nvm.sh
+fi
 nvm install node
 nvm use node
 find $(npm root -g) -name ".DS_Store" -delete
@@ -90,7 +108,7 @@ npm update -g
 # Install .NET and Tools
 # -----------------------------
 echo "Setting up .NET..."
-brew install dotnet
+install_cask dotnet
 
 echo 'export PATH="$HOME/.dotnet/tools:$PATH"' >> ~/.zshrc
 source ~/.zshrc
@@ -147,5 +165,10 @@ brew install --cask font-lobster font-lobster-two font-lobster-two-nerd-font
 brew install --cask font-pacifico font-pacifico-nerd-font
 brew install --cask font-raleway font-raleway-dots font-raleway-nerd-font font-raleway-thin font-raleway-thin-dots
 
+
+# -----------------------------
+# Finalize
+# -----------------------------
+brew cleanup
 
 echo "System update complete!"
